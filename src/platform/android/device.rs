@@ -13,13 +13,13 @@
 //  0. You just DO WHAT THE FUCK YOU WANT TO.
 #![allow(unused_variables)]
 
-use std::io::{Read, Write};
-use std::net::IpAddr;
-use std::os::unix::io::{AsRawFd, IntoRawFd, RawFd};
 use crate::configuration::Configuration;
 use crate::device::AbstractDevice;
 use crate::error::{Error, Result};
 use crate::platform::posix::{self, Fd, Tun};
+use std::io::{Read, Write};
+use std::net::IpAddr;
+use std::os::unix::io::{AsRawFd, IntoRawFd, RawFd};
 
 /// A TUN device for Android.
 pub struct Device {
@@ -68,7 +68,8 @@ impl Device {
     }
 
     /// Set non-blocking mode
-    pub fn set_nonblock(&self) -> std::io::Result<()> {
+    #[allow(dead_code)]
+    pub(crate) fn set_nonblock(&self) -> std::io::Result<()> {
         self.tun.set_nonblock()
     }
 
